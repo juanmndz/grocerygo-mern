@@ -32,7 +32,7 @@ const usersReducer = (state = initialState, action) =>
       case LOAD_USERS:
         draft.loading = true;
         draft.error = false;
-        draft.users = {};
+        draft.users = [];
         break
       case LOAD_USERS_SUCCESS:
         draft.loading = false;
