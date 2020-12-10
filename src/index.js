@@ -6,13 +6,16 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import history from './utils/history';
 import configureStore from './configureStore';
-
+import globalStyles from './styles/globalStyles'
+import resetStyles from './styles/resetStyles'
 const initialState = {};
 const store = configureStore(initialState, history);
 
 ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
+        <resetStyles />
+        <globalStyles />
         <App />
       </ConnectedRouter>
     </Provider>,  
