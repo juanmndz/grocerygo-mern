@@ -11,12 +11,12 @@ export const loadUsers = () => ({
 
 export const usersLoaded = users => ({
   type: LOAD_USERS_SUCCESS,
-  users,
+  payload: users,
 });
 
 export const usersLoadingError = error => ({
   type: LOAD_USERS_ERROR,
-  error,
+  payload: error,
 });
 
 
@@ -41,7 +41,7 @@ const usersReducer = (state = initialState, action) =>
         break
       case LOAD_USERS_ERROR:
         draft.loading = false;
-        draft.error = action.error;
+        draft.error = action.payload;
         break
       default:
         return state
