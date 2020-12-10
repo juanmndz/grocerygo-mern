@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  header: {
+      backgroundColor: "#131921",
+      }
 }));
 
 const cartProducts = [
@@ -54,7 +57,7 @@ const cartProducts = [
   },
 ];
 
-export default function ButtonAppBar() {
+export default function Header() {
   const classes = useStyles();
   const [cartDrawer, setCartDrawer] = useState(false);
 
@@ -115,7 +118,7 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar  position="sticky" className={classes.header}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -126,7 +129,7 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            Groceries
           </Typography>
           <Button color="inherit">Login</Button>
           <IconButton
