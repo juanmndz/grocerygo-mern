@@ -1,7 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import ProductList from '../components/ProductList/ProductList';
+import CatalogList from '../components/CatalogList/CatalogList';
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -13,14 +13,14 @@ export default function HomePage() {
   return (
     <Box margin={10}>
       <Typography component="h1" variant="h4">
-        Dairy
+        Dairyll
       </Typography>
-      <ProductList />
+      <CatalogList />
       <Typography component="h1" variant="h4">
         Candy
       </Typography>
 
-      <ProductList />
+      <CatalogList />
     </Box>
   );
 }

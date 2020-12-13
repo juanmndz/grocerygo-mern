@@ -1,36 +1,61 @@
-import produce from 'immer';
+import { CART_ADD_ITEM, CART_CLEAR_ITEMS, CART_REMOVE_ITEM } from "./cartActions"
 
-export const LOAD_USERS = 'LOAD_USERS';
-export const LOAD_USERS_SUCCESS = 'LOAD_USERS_SUCCESS';
-export const LOAD_USERS_ERROR = 'LOAD_USERS_ERROR';
-
-
-const initialState = {
-  cart: false,
-  error: false,
-  users: [],
-};
-
-const usersReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  
+const cartReducer = (
+    state = { cartItems: [
+      {
+        id: '1',
+        title: 'Potato',
+        price: '2.24',
+        qty: 2,
+        stock: 100,
+        desc: 'Potato',
+        imgsrc: 'https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg',
+      },
+      {
+        id: '2',
+        title: 'Potato',
+        price: '2.24',
+        qty: 2,
+        stock: 100,
+        desc: 'Potato',
+        imgsrc: 'https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg',
+      },
+    ] 
+  },
+    action
+  ) => {
     switch (action.type) {
-      case LOAD_USERS:
-        draft.loading = true;
-        draft.error = false;
-        draft.users = [];
-        break
-      case LOAD_USERS_SUCCESS:
-        draft.loading = false;
-        draft.error = false;
-        draft.users = action.payload;
-        break
-      case LOAD_USERS_ERROR:
-        draft.loading = false;
-        draft.error = action.payload;
-        break
+      case CART_ADD_ITEM:
+        const item = action.payload
+  
+        const existItem = state.cartItems.find((x) => x.product === item.product)
+  
+        if (existItem) {
+          return {
+            ...state,
+            cartItems: state.cartItems.map((x) =>
+              x.product === existItem.product ? item : x
+            ),
+          }
+        } else {
+          return {
+            ...state,
+            cartItems: [...state.cartItems, item],
+          }
+        }
+      case CART_REMOVE_ITEM:
+        return {
+          ...state,
+          cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+        }
+      case CART_CLEAR_ITEMS:
+        return {
+          ...state,
+          cartItems: [],
+        }
       default:
         return state
     }
-  });
-
-export default usersReducer;
+  }
+  export default cartReducer

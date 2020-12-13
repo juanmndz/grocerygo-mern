@@ -8,24 +8,23 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
-function Product(props) {
-  const { src, desc, quantity, price } = props;
-
+function CatalogListItem(props) {
+  const { imgsrc, qty, price, title } = props;
   return (
     <div>
       <Card>
         <CardActionArea>
-          <img src={src} />
+          <img src={imgsrc} />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {desc}
+              {title}
             </Typography>
             <Typography color="textSecondary" component="p">
               <span>Price:</span>$ {price}.00
             </Typography>
             <Typography color="textSecondary" component="p">
               <span>Available Quantity:</span>
-              {quantity}
+              {qty}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -51,4 +50,4 @@ function Product(props) {
   );
 }
 
-export default Product;
+export default CatalogListItem;
