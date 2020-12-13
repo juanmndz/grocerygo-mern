@@ -5,23 +5,8 @@ export const LOAD_USERS_SUCCESS = 'LOAD_USERS_SUCCESS';
 export const LOAD_USERS_ERROR = 'LOAD_USERS_ERROR';
 
 
-export const loadUsers = () => ({
-  type: LOAD_USERS,
-});
-
-export const usersLoaded = users => ({
-  type: LOAD_USERS_SUCCESS,
-  payload: users,
-});
-
-export const usersLoadingError = error => ({
-  type: LOAD_USERS_ERROR,
-  payload: error,
-});
-
-
 const initialState = {
-  loading: false,
+  cart: false,
   error: false,
   users: [],
 };

@@ -1,5 +1,5 @@
 import Header from './components/Header/Header';
-import HomePage from './pages/HomePage/HomePage';
+import HomePage from './screens/HomeScreen';
 function App() {
   return (
     <div>
