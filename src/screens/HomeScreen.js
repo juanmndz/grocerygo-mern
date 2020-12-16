@@ -11,7 +11,7 @@ export default function HomePage() {
 
   }, [dispatch]);
   return (
-    <Box margin={10}>
+    <Box mt={10} mr={2} ml={2}>
       <Typography component="h1" variant="h4">
         Dairyll
       </Typography>

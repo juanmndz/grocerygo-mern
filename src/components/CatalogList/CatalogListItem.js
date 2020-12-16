@@ -9,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
 function CatalogListItem(props) {
-  const { imgsrc, qty, price, title } = props;
+  const { imgsrc, qty, price, title, addItemCart } = props;
   return (
     <div>
       <Card>
@@ -41,6 +41,7 @@ function CatalogListItem(props) {
             color="primary"
             variant="contained"
             id="addToCart"
+            onClick={addItemCart}
           >
             Add To Cart
           </Button>
@@ -51,3 +52,4 @@ function CatalogListItem(props) {
 }
 
 export default CatalogListItem;
+     

@@ -14,10 +14,14 @@ import {
 } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../../modules/cart/cartActions';
+import useToggle from '../../hooks/useToggle';
 
 export default function Header() {
-  const [cartDrawer, setCartDrawer] = useState(false);
+  const [cartDrawer, setCartDrawer] = useToggle(false);
+  const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart);
   const {cartItems } = cart;
   const totalPrice = () => {
@@ -27,9 +31,11 @@ export default function Header() {
     return totalPrice;
   };
 
-  const deleteItem = (id, amount) => {
-    return;
+  const removeItemFromCart = (item) => {
+    dispatch({ type: CART_REMOVE_ITEM, payload: item });
   };
+
+
 
   const cartList = cartItems.map((prod) => (
     <div key={prod.id}>
@@ -63,7 +69,7 @@ export default function Header() {
         ></ListItemText>
         <Button
           aria-label="reduce"
-          onClick={() => deleteItem(prod.id, prod.qty)}
+          onClick={() => removeItemFromCart(prod)}
         >
           <RemoveIcon style={{ color: 'red' }} fontSize="small" />
         </Button>
@@ -78,7 +84,7 @@ export default function Header() {
             aria-label="cart"
             variant="outlined"
             color="inherit"
-            onClick={() => setCartDrawer(true)}
+            onClick={setCartDrawer}
           >
             <Badge badgeContent={cartItems.length} color="secondary">
               <ShoppingCartIcon fontSize="large" />
@@ -88,7 +94,7 @@ export default function Header() {
             variant="temporary"
             anchor="right"
             open={cartDrawer}
-            onClose={() => setCartDrawer(false)}
+            onClose={setCartDrawer}
           >
             <Typography component="h1" variant="h4">
               Shopping Cart
