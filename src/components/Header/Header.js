@@ -20,7 +20,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   header: {
-      backgroundColor: "#131921",
+      backgroundColor: '#fff',
+      color: '#43B02A',
+      boxShadow: "0px 0px 0px 0px"
       }
 }));
 

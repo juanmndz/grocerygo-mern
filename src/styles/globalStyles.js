@@ -13,12 +13,10 @@ const GlobalStyles = createGlobalStyle`
     -ms-text-size-adjust: 100%;
   }
 
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
 
+* {
+  box-sizing: border-box;
+}
   html,
   body {
     -webkit-font-smoothing: antialiased;

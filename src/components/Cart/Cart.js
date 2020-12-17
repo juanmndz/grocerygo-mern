@@ -1,29 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import {
-    Avatar,
+  Avatar,
   Badge,
-  Divider,
   Drawer,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
+  makeStyles,
   Typography,
 } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { useDispatch, useSelector } from 'react-redux';
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../../modules/cart/cartActions';
+import { CART_REMOVE_ITEM } from '../../modules/cart/cartActions';
 import useToggle from '../../hooks/useToggle';
+import styles from './Cart.module.scss';
+import CloseIcon from '@material-ui/icons/Close';
+import PlusIcon from '@material-ui/icons/Add';
 
 export default function Header() {
   const [cartDrawer, setCartDrawer] = useToggle(false);
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  const {cartItems } = cart;
+  const { cartItems } = cart;
   const totalPrice = () => {
     let allPrices = [];
     cartItems.map((prod) => allPrices.push(prod.price * prod.qty));
@@ -35,7 +38,32 @@ export default function Header() {
     dispatch({ type: CART_REMOVE_ITEM, payload: item });
   };
 
+  const drawerWidth = '450px';
+  const useStyles = makeStyles((theme) => ({
+    drawerPaper: {
+      [theme.breakpoints.between('xs', 'sm')]: {
+        width: '100%',
+      },
+      // 760 over
+      [theme.breakpoints.up('sm')]: {
+        width: drawerWidth,
+      },
+    },
+    buttonColor: {
+      color: '#43B02A',
+      borderColor: '#43B02A',
+    },
+    checkoutButton: {
+      color: '#FFF',
+      backgroundColor: '#43B02A',
+      width: '100%',
+      height: '48px',
+      fontWeight: '750',
+      fontSize: '18px',
+    },
+  }));
 
+  const classes = useStyles();
 
   const cartList = cartItems.map((prod) => (
     <div key={prod.id}>
@@ -48,84 +76,90 @@ export default function Header() {
           primary={prod.desc}
           secondary={
             <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                color="textPrimary"
-              >
-                qty :
-              </Typography>
-              {` ${prod.qty}`} <br></br>
-              <Typography
-                component="span"
-                variant="body2"
-                color="textPrimary"
-              >
+              <Typography component="span" variant="body2" color="textPrimary">
                 Price :
               </Typography>
               {` ${prod.price}`}.00
             </React.Fragment>
           }
         ></ListItemText>
-        <Button
-          aria-label="reduce"
-          onClick={() => removeItemFromCart(prod)}
-        >
+        <Button onClick={() => removeItemFromCart(prod)}>
+          <PlusIcon style={{ color: '#43B02A' }} fontSize="small" />
+        </Button>
+        <div className={styles.itemQty}>{`${prod.qty}`}</div>
+        <Button onClick={() => removeItemFromCart(prod)}>
           <RemoveIcon style={{ color: 'red' }} fontSize="small" />
         </Button>
       </ListItem>
-      <Divider variant="fullWidth" component="li" />
     </div>
   ));
 
-  return ( 
-  <React.Fragment>
-          <IconButton
-            aria-label="cart"
-            variant="outlined"
-            color="inherit"
-            onClick={setCartDrawer}
-          >
-            <Badge badgeContent={cartItems.length} color="secondary">
-              <ShoppingCartIcon fontSize="large" />
-            </Badge>
-          </IconButton>
-          <Drawer
-            variant="temporary"
-            anchor="right"
-            open={cartDrawer}
-            onClose={setCartDrawer}
-          >
+  return (
+    <React.Fragment>
+      <IconButton
+        aria-label="cart"
+        variant="outlined"
+        color="inherit"
+        onClick={setCartDrawer}
+      >
+        <Badge badgeContent={cartItems.length} color="secondary">
+          <ShoppingCartIcon fontSize="large" />
+        </Badge>
+      </IconButton>
+      <Drawer
+        variant="temporary"
+        anchor="right"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        open={cartDrawer}
+        onClose={setCartDrawer}
+      >
+        <div className={styles.cart}>
+          <div className={styles.cartHeader}>
             <Typography component="h1" variant="h4">
               Shopping Cart
             </Typography>
 
-            <Divider />
-            <List>
-              {cartList.length > 0 ? (
-                cartList
-              ) : (
-                <Typography variant="h5" style={{ textAlign: 'center' }}>
-                  No items in your shopping cart.
-                </Typography>
-              )}
-            </List>
-            <div>
+            <Button
+              variant="outlined"
+              className={classes.buttonColor}
+              startIcon={<CloseIcon />}
+              onClick={setCartDrawer}
+            >
+              Close
+            </Button>
+          </div>
+          <div className={styles.divider} />
+          <List className={styles.listItem}>
+            {cartList.length > 0 ? (
+              cartList
+            ) : (
+              <Typography variant="h5" style={{ textAlign: 'center' }}>
+                No items in your shopping cart.
+              </Typography>
+            )}
+          </List>
+          <div className={styles.checkoutSection}>
+            <div className={styles.subtotal}>
               <Typography component="p" variant="h5">
                 <span>Subtotal : $ </span>
                 {cartItems.length && totalPrice()}
                 .00
               </Typography>
+            </div>
+            <div className={styles.checkout}>
               <Button
-                variant="outlined"
                 size="medium"
-                // onClick={checkout}
+                className={classes.checkoutButton}
+                variant="contained"
               >
-                Checkout
+                Go to Checkout
               </Button>
             </div>
-          </Drawer>
-
+          </div>
+        </div>
+      </Drawer>
     </React.Fragment>
   );
 }
