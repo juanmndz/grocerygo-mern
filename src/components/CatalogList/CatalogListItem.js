@@ -7,49 +7,38 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import styles from './CatalogListItem.module.scss';
+import clsx from 'clsx';
+
+const stylesx = {
+  checkoutButton: {
+    color: '#FFF',
+    backgroundColor: '#43B02A',
+    width: '100%',
+    height: '48px',
+    fontWeight: '750',
+    fontSize: '18px',
+  },
+}
 
 function CatalogListItem(props) {
-  const { imgsrc, qty, price, title, addItemCart } = props;
+  const { imgsrc, qty, price, title, addItemCart, desc } = props;
   return (
-    <div>
-      <Card>
-        <CardActionArea>
-          <img src={imgsrc} />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {title}
-            </Typography>
-            <Typography color="textSecondary" component="p">
-              <span>Price:</span>$ {price}.00
-            </Typography>
-            <Typography color="textSecondary" component="p">
-              <span>Available Quantity:</span>
-              {qty}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button aria-label="reduce">
-            <RemoveIcon fontSize="small" />
-          </Button>
-          <Typography component="span">{0}</Typography>
-          <Button aria-label="increase">
-            <AddIcon fontSize="small" />
-          </Button>
-          <Button
-            size="medium"
-            color="primary"
-            variant="contained"
-            id="addToCart"
-            onClick={addItemCart}
-          >
-            Add To Cart
-          </Button>
-        </CardActions>
-      </Card>
+    <div className={clsx(styles.catalogListItem, styles.flexOrder)    }>
+        <img alt="product image" className={styles.productImg} src={imgsrc} />
+      <div className={styles.productInfo}>
+        <span className={styles.productPrice}>{`$${price}`}</span>
+        <span>{`${title}`}</span>
+      </div>
+      <button
+        size="medium"
+        className={styles.productButton}
+        variant="contained"
+        >
+        Add To Cart
+      </button>
     </div>
   );
 }
 
 export default CatalogListItem;
-     

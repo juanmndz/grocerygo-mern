@@ -10,7 +10,7 @@ const cartReducer = (
         price: '2.24',
         qty: 2,
         stock: 100,
-        desc: 'Potato',
+        desc: 'This is a potato',
         imgsrc: 'https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg',
       },
       {
@@ -19,7 +19,7 @@ const cartReducer = (
         price: '2.24',
         qty: 2,
         stock: 100,
-        desc: 'Potato',
+        desc: 'This is a potato',
         imgsrc: 'https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg',
       },
     ] 

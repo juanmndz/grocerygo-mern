@@ -67,22 +67,19 @@ export default function Header() {
 
   const cartList = cartItems.map((prod) => (
     <div key={prod.id}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar alt="Img" src={prod.imgsrc} />
-        </ListItemAvatar>
-        <ListItemText
-          style={{ fontSize: '20px' }}
-          primary={prod.desc}
-          secondary={
-            <React.Fragment>
+      <div className={styles.product}>
+        <div>
+          <img className={styles.imgContain}  alt="Img" src={prod.imgsrc} />
+        </div>
+        <div className={styles.productDescription}>
+
               <Typography component="span" variant="body2" color="textPrimary">
-                Price :
+              {`${prod.desc}`}
               </Typography>
-              {` ${prod.price}`}.00
-            </React.Fragment>
-          }
-        ></ListItemText>
+              <Typography component="span" variant="body2" color="textPrimary">
+                Price :               {` ${prod.price}`}.00
+              </Typography>
+            </div>   
         <Button onClick={() => removeItemFromCart(prod)}>
           <PlusIcon style={{ color: '#43B02A' }} fontSize="small" />
         </Button>
@@ -90,7 +87,7 @@ export default function Header() {
         <Button onClick={() => removeItemFromCart(prod)}>
           <RemoveIcon style={{ color: 'red' }} fontSize="small" />
         </Button>
-      </ListItem>
+      </div>
     </div>
   ));
 

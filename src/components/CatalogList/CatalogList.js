@@ -8,6 +8,7 @@ import { CART_ADD_ITEM } from '../../modules/cart/cartActions';
 import useToggle from '../../hooks/useToggle';
 import { IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import styles from './CatalogList.module.scss'
 
 function CatalogList() {
   const dispatch = useDispatch();
@@ -24,7 +25,6 @@ function CatalogList() {
     dispatch(catalogListAsync());
   }, [dispatch]);
   const catalogListDisplay = catalog.map((prod) => (
-    <Grid zeroMinWidth item xs={12} sm={6} md={4} lg={4} xl={3} key={prod.id}>
       <CatalogListItem
         id={prod.id}
         desc={prod.desc}
@@ -35,16 +35,14 @@ function CatalogList() {
         key={prod.id}
         addItemCart={() => handleAddItemToCart(prod)}
       />
-    </Grid>
   ));
   return (
     <>
       {!loading && (
-        <Box width="75%" mx="auto" style={{ marginTop: '20px' }}>
-          <Grid container spacing={3}>
-            {catalogListDisplay}
-          </Grid>
-        </Box>
+    <div className={styles.catalogList}>
+    {catalogListDisplay}
+
+    </div>
       )}
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
