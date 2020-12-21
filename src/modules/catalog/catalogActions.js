@@ -10,7 +10,7 @@ const catalog = [
       title: 'Potato',
       price: '2.24',
       stock: 100,
-      desc: 'Potato',
+      desc: '1 lb',
       imgsrc: 'https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg',
     },
     {
@@ -18,7 +18,7 @@ const catalog = [
       title: 'Potato',
       price: '2.24',
       stock: 100,
-      desc: 'Potato',
+      desc: '1 lb',
       imgsrc: 'https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg',
     },
   ]

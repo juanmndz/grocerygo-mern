@@ -13,7 +13,6 @@ const GlobalStyles = createGlobalStyle`
     -ms-text-size-adjust: 100%;
   }
 
-
 * {
   box-sizing: border-box;
 }
@@ -21,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
+    font-family: Boing,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,sans-serif;
   }
 
   img {
