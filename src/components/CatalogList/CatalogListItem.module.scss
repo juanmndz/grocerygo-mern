@@ -51,7 +51,7 @@
     color: #FFF;
     background-color: #43B02A;
     flex: .4;
-    height: 48px;
+    height: 36px;
     font-weight: 700;
     font-size: 16px;
     border-radius: 24px;    
@@ -63,7 +63,7 @@
     color: #FFF;
     background-color: #43B02A;
     flex: 1;
-    height: 48px;
+    height: 36px;
     font-weight: 700;
     font-size: 14px;
     border-radius: 24px;    
@@ -73,8 +73,8 @@
 .productButtonsAbsolute {
     color: #FFF;
     background-color: #43B02A;
-    flex: 1;
-    height: 48px;
+    display: flex;
+    height: 36px;
     font-weight: 700;
     font-size: 14px;
     border-radius: 24px;    
@@ -84,9 +84,30 @@
     z-index: 999;
     position: absolute;
     transition: all 0.3s ease;
-
   }
+  
+  .buttonPlus {
+    height: 36px;
+    width: 32px;
+    border-radius: 24px;    
+    cursor: pointer;
+    flex: .3;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background-color: #43B02A;
+    color: rgb(255, 255, 255);
+    padding: 0px;
+    border-width: 0px;
+    border-style: solid;
+    border-image: initial;
+    transition: color 0.15s ease-in 0s, background-color, border-color;
+}
 
+.textQty {
+    flex: .4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .productTitle {
     display: block;
     margin-bottom: 8px;

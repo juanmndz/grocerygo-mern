@@ -1,30 +1,14 @@
 import React, { useState } from 'react';
 import styles from './CatalogListItem.module.scss';
 import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useToggle from '../../hooks/useToggle';
-import { makeStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: 'relative',
-  },
-  dropdown: {
-    position: 'absolute',
-    top: 28,
-    right: 0,
-    left: 0,
-    zIndex: 1,
-    border: '1px solid',
-    padding: theme.spacing(1),
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 
 
 function CatalogListItem(props) {
-  const { imgsrc, price, title, addItemCart, desc, id } = props;
+  const { imgsrc, price, title, addItemCart, removeItemCart, desc, id } = props;
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemInCart = cartItems.find((cartItem) => cartItem.id === id);
@@ -36,6 +20,11 @@ function CatalogListItem(props) {
   const handleClickAway = () => {
     setButtonHighlight(false);
   };
+
+  const addItemCartWUi = () => {
+    handleClick()
+    addItemCart()
+  }
 
 
   return (
@@ -53,6 +42,7 @@ function CatalogListItem(props) {
             onClickAway={handleClickAway}
           >
         <div className={styles.productButtonArea} style={{position: 'relative'}}>
+
           <button
             onClick={handleClick}
             className={clsx(styles.productButton)}
@@ -63,12 +53,16 @@ function CatalogListItem(props) {
             <div className={styles.productButtonsAbsolute}>
             <button
               onClick={addItemCart}
+              className={styles.buttonPlus}
             >
               +
             </button>
+            <div className={styles.textQty}>
             {itemInCart.qty}
+            </div>
             <button
-              onClick={addItemCart}
+              onClick={removeItemCart}
+              className={styles.buttonPlus}
             >
               -
             </button>
@@ -80,7 +74,7 @@ function CatalogListItem(props) {
       ) : (
             <div className={styles.productButtonArea}>
             <button
-              onClick={addItemCart}
+              onClick={addItemCartWUi}
               className={styles.productButtonFlex100}
             >
               Add To Cart

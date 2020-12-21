@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import CatalogListItem from './CatalogListItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { catalogListAsync } from '../../modules/catalog/catalogActions';
-import { CART_ADD_ITEM } from '../../modules/cart/cartActions';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../../modules/cart/cartActions';
 import useToggle from '../../hooks/useToggle';
 import { IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
@@ -20,6 +20,9 @@ function CatalogList() {
     dispatch({ type: CART_ADD_ITEM, payload: item });
     toggleOpenSnack();
   };
+  const handleRemoveItemCart = (item) => {
+    dispatch({ type: CART_REMOVE_ITEM, payload: item });
+  };
 
   useEffect(() => {
     dispatch(catalogListAsync());
@@ -34,6 +37,7 @@ function CatalogList() {
         quantity={prod.quantity}
         key={prod.id}
         addItemCart={() => handleAddItemToCart(prod)}
+        removeItemCart={() => handleRemoveItemCart(prod)}
       />
   ));
   return (
