@@ -1,6 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
+import userRoutes from './routers/userRoutes.js'
+import productRoutes from './routers/productRoutes.js'
+import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 
 dotenv.config();
 
@@ -14,15 +18,27 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/eccomerce', {
   useCreateIndex: true,
 });
 
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'))
+  }
+  
+app.use('/products', productRoutes)
+app.use('/users', userRoutes)
+
+
 app.get('/', (req, res) => {
   res.send('Server is ready');
 });
 
-app.use((err, req, res, next) => {
-  res.status(500).send({ message: err.message });
-});
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Serve at http://localhost:${port}`);
-});
+
+app.use(notFound)
+app.use(errorHandler)
+
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+  )});

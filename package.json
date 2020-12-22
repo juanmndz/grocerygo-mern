@@ -5,8 +5,8 @@
   "description": "Ecommerce",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/server",
-    "server": "nodemon backend/server",
+    "start": "nodemon --exec babel-node backend/server",
+    "server": "nodemon --exec babel-node backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -20,8 +20,13 @@
     "mongoose": "^5.10.7"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "eslint": "^7.9.0",
     "eslint-plugin-react": "^7.21.2",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
   }
 }
