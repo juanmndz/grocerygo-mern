@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 export const generateToken = (user) => {
   return jwt.sign(
@@ -6,12 +6,11 @@ export const generateToken = (user) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
-      isSeller: user.isSeller,
+      status: user.status,
     },
-    process.env.JWT_SECRET || 'somethingsecret',
+    process.env.JWT_SECRET || "somethingsecret",
     {
-      expiresIn: '30d',
+      expiresIn: "30d",
     }
   );
 };
@@ -22,10 +21,12 @@ export const isAuth = (req, res, next) => {
     const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(
       token,
-      process.env.JWT_SECRET || 'somethingsecret',
+      process.env.JWT_SECRET || "somethingsecret",
       (err, decode) => {
         if (err) {
-          res.status(401).send({ message: 'Invalid Token' });
+          console.error(err);
+          res.status(401);
+          throw new Error("Not authorized, token failed");
         } else {
           req.user = decode;
           next();
@@ -33,13 +34,15 @@ export const isAuth = (req, res, next) => {
       }
     );
   } else {
-    res.status(401).send({ message: 'No Token' });
+    res.status(401);
+    throw new Error("Not authorized, no token");
   }
 };
 export const isAdmin = (req, res, next) => {
-  if (req.user && req.user.isAdmin) {
+  if (req.user && req.status === 'admin') {
     next();
   } else {
-    res.status(401).send({ message: 'Invalid Admin Token' });
+    res.status(401);
+    throw new Error("Not authorized as an admin");
   }
 };
