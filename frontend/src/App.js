@@ -1,11 +1,17 @@
 import Header from './components/Header/Header';
-import HomePage from './screens/HomeScreen';
+import Routes from './Routes';
+import GlobalStyles from './styles/globalStyles'
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
+
 function App() {
   return (
-    <div>
+    <Router>
       <Header />
-      <HomePage />
-    </div>
+      <GlobalStyles />
+      <Routes />
+    </Router>
   );
 }
 
