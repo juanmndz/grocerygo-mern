@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import userRoutes from './routers/userRoutes.js'
+import orderRoutes from './routers/orderRoutes.js'
 import productRoutes from './routers/productRoutes.js'
 import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV === 'development') {
   
 app.use('/products', productRoutes)
 app.use('/users', userRoutes)
+app.use('/order', orderRoutes)
 
 
 app.get('/', (req, res) => {

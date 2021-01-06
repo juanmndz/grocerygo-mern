@@ -2,7 +2,6 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../models/productModel.js';
-
 const productRouter = express.Router();
 
 productRouter.get(
@@ -16,14 +15,22 @@ productRouter.get(
 productRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
-    // await Product.remove({});
+    await Product.remove({});
     const createdProducts = await Product.insertMany(data.products);
     res.send({ createdProducts });
   })
 );
-
+productRouter.post(
+  '/filter',
+  expressAsyncHandler(async (req, res) => {
+    const {filter} = req.body
+    
+    const products = await Product.find({tags: filter })
+    res.json(products)
+  })
+)
 productRouter.get(
-  '/:id',
+  '/productId/:id',
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
