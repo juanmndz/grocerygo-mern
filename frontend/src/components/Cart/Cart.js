@@ -20,6 +20,7 @@ import useToggle from '../../hooks/useToggle';
 import styles from './Cart.module.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import PlusIcon from '@material-ui/icons/Add';
+import { useHistory } from 'react-router-dom';
 
 export default function Header() {
   const [cartDrawer, setCartDrawer] = useToggle(false);
@@ -34,9 +35,15 @@ export default function Header() {
     return totalPrice;
   };
 
+  const history = useHistory()
   const removeItemFromCart = (item) => {
     dispatch({ type: CART_REMOVE_ITEM, payload: item });
   };
+
+  const pushCheckout = () => {
+    history.push('/checkout')
+    setCartDrawer()
+  }
 
   const drawerWidth = '450px';
   const useStyles = makeStyles((theme) => ({
@@ -69,7 +76,7 @@ export default function Header() {
     <div key={prod.id}>
       <div className={styles.product}>
         <div>
-          <img className={styles.imgContain}  alt="Img" src={prod.imgsrc} />
+          <img className={styles.imgContain}  alt="Img" src={prod.image} />
         </div>
         <div className={styles.productDescription}>
 
@@ -150,6 +157,7 @@ export default function Header() {
                 size="medium"
                 className={classes.checkoutButton}
                 variant="contained"
+                onClick={pushCheckout}
               >
                 Go to Checkout
               </Button>

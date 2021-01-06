@@ -9,6 +9,15 @@ import useToggle from '../../hooks/useToggle';
 import { IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import styles from './CatalogList.module.scss'
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Autoplay,
+  Virtual
+} from "swiper/core";
+import "swiper/swiper-bundle.css";
+SwiperCore.use([Navigation, Pagination, Autoplay, Virtual]);
 
 function CatalogList({filter}) {
   const dispatch = useDispatch();
@@ -26,7 +35,8 @@ function CatalogList({filter}) {
     dispatch({ type: CART_REMOVE_ITEM, payload: item });
   };
 
-  const catalogListDisplay = filterCatalogList.map((prod) => (
+  const catalogListDisplay = filterCatalogList.map((prod, index) => (
+    <SwiperSlide key={`slide-${index}`} style={{ listStyle: "none" }}>
       <CatalogListItem
         id={prod._id}
         desc={prod.desc}
@@ -38,12 +48,29 @@ function CatalogList({filter}) {
         addItemCart={() => handleAddItemToCart(prod)}
         removeItemCart={() => handleRemoveItemCart(prod)}
       />
+            </SwiperSlide>
+
   ));
   return (
     <>
       {!loading && (
-    <div className={styles.catalogList}>
+    <div>
+    <Swiper
+      id="swiper"
+      virtual
+      slidesPerView={5}
+      // slidesPerColumn={2}
+      // slidesPerColumnFill="row"
+      spaceBetween={5}
+      // slidesPerGroup={2}
+      autoplay
+      // loop
+
+    //   navigation
+      // pagination
+    >
     {catalogListDisplay}
+    </Swiper>
 
     </div>
       )}

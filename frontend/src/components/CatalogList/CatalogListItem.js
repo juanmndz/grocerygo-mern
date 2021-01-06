@@ -8,10 +8,10 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
 function CatalogListItem(props) {
-  const { imgsrc, price, title, addItemCart, removeItemCart, desc, id } = props;
-
+  const { image, price, name, addItemCart, removeItemCart, desc, id } = props;
+  
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const itemInCart = cartItems.find((cartItem) => cartItem.id === id);
+  const itemInCart = cartItems.find((cartItem) => cartItem._id === id);
   const [buttonHighlight, setButtonHighlight] = useState(useToggle(false));
   const handleClick = () => {
     setButtonHighlight((prev) => !prev);
@@ -29,10 +29,10 @@ function CatalogListItem(props) {
 
   return (
     <div className={clsx(styles.catalogListItem, styles.flexOrder)}>
-      <img alt="product image" className={styles.productImg} src={imgsrc} />
+      <img alt="product image" className={styles.productImg} src={image} />
       <div className={styles.productInfo}>
         <span className={styles.productPrice}>{`$${price}`}</span>
-        <span className={styles.productTitle}>{`${title}`}</span>
+        <span className={styles.productTitle}>{`${name}`}</span>
         <span className={styles.productDesc}>{`${desc}`}</span>
       </div>
       {itemInCart ? (

@@ -1,33 +1,19 @@
-import { CART_ADD_ITEM, CART_CLEAR_ITEMS, CART_REMOVE_ITEM } from "./cartActions"
+import { CART_ADD_ITEM, CART_CLEAR_ITEMS, CART_REMOVE_ITEM, CART_SAVE_SHIPPING_ADDRESS } from "./cartActions"
 import { addItemToCart, removeItemFromCart } from "./cartUtils";
 
   
 const cartReducer = (
-    state = { cartItems: [
-      {
-        id: '1',
-        title: 'Potato',
-        price: '2.24',
-        qty: 2,
-        stock: 100,
-        desc: 'This is a potato',
-        imgsrc: 'https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg',
-      },
-      {
-        id: '2',
-        title: 'Potato',
-        price: '2.24',
-        qty: 2,
-        stock: 100,
-        desc: 'This is a potato',
-        imgsrc: 'https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg',
-      },
-    ] 
+    state = { 
+      cartItems: [
+
+    ],
+    shippingAddress:{}
   },
     action
   ) => {
     switch (action.type) {
       case CART_ADD_ITEM:
+        console.log(action)
         return {...state, cartItems: addItemToCart(state.cartItems, action.payload)}
       case CART_REMOVE_ITEM:
         return {...state, cartItems: removeItemFromCart(state.cartItems, action.payload)}
@@ -35,6 +21,11 @@ const cartReducer = (
         return {
           ...state,
           cartItems: [],
+        }
+      case CART_SAVE_SHIPPING_ADDRESS:
+        return {
+          ...state,
+          shippingAddress: action.payload
         }
       default:
         return state
