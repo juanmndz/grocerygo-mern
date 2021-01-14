@@ -30,4 +30,3 @@ export const saveShippingAddress = (data) => (dispatch) => {
   
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
   }
-  

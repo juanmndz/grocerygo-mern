@@ -8,7 +8,8 @@ export const CATALOG_LIST_FAIL = 'CATALOG_LIST_FAIL'
 export const catalogListAsync = () => async (dispatch) => {
     dispatch({type: CATALOG_LIST_REQUEST})
     try {
-      const { data } = await Axios.get('/products')
+      const { data } = await Axios.get('/api/products')
+      console.log(data, 'data')
       dispatch({type: CATALOG_LIST_SUCCESS, payload: data});
     } catch (error) {
       const message =

@@ -63,7 +63,7 @@ function CatalogList({filter}) {
       // slidesPerColumnFill="row"
       spaceBetween={5}
       // slidesPerGroup={2}
-      autoplay
+      // autoplay
       // loop
 
     //   navigation

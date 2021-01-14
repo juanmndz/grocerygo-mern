@@ -109,7 +109,7 @@ orderRouter.get(
 orderRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
-    // await Order.remove({});
+    await Order.remove({});
     console.log('fdsf')
     // const createdProducts = await Product.insertMany(data.products);
     res.send({  });

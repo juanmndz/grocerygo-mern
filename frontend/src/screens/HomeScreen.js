@@ -39,7 +39,6 @@ export default function HomePage() {
       Pantry
       </Typography>
         <CatalogHome filter={'pantry'} />
-
     </Box>
   );
 }

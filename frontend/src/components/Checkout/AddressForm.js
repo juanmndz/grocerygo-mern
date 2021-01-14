@@ -26,7 +26,7 @@ const AddressForm = ({ checkoutToken, nextStep }) => {
             <FormInput required name="email" label="Email" />
             <FormInput required name="city" label="City" />
             <FormInput required name="postalCode" label="Zip / Postal code" />
-            <FormInput required name="country" label="Country" />
+            <FormInput required name="state" label="State" />
           </Grid>
           <br />
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>

@@ -62,7 +62,7 @@ export const login = (dataBody) => async (dispatch) => {
       }
   
       const { data } = await axios.post(
-        '/users/register',
+        '/api/users/register',
         { name: dataBody.name, email: dataBody.email, password: dataBody.password },
         config
       )

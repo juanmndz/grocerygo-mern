@@ -20,7 +20,7 @@ const PaymentForm = ({ nextStep, backStep, cart, onOrder }) => {
   useEffect(() => {
     // generate the special stripe secret which allows us to charge a customer
     const getClientSecret = async () => {
-      const paymentIntent = await Axios.post('/order/payment', {
+      const paymentIntent = await Axios.post('/api/order/payment', {
         total: cart.totalPrice,
       });
 

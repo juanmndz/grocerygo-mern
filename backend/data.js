@@ -29,7 +29,7 @@ const data = {
       name: 'Cucumbers',
       tags: ['vegetables'],
       image: '/assets/veges/Cucumbers.png',
-      price: 120,
+      price: 1.20,
       stock: 10,
       desc: '1 ct',
 

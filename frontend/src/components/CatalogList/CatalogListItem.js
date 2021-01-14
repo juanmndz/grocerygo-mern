@@ -2,86 +2,87 @@ import React, { useState } from 'react';
 import styles from './CatalogListItem.module.scss';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
-import useToggle from '../../hooks/useToggle';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-
-
+import Detailscreen from '../../screens/DetailScreen/DetailScreen';
+import ModalCommon from '../Common/ModalCommon';
+import useStyles, { ColorButton } from '../Common/ColorButton';
 
 function CatalogListItem(props) {
-  const { image, price, name, addItemCart, removeItemCart, desc, id } = props;
-  
+  const { image, price, name, desc, id, addItemCart, removeItemCart } = props;
+  const [open, setOpen] = useState(false);
+  const classes = useStyles();
+
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemInCart = cartItems.find((cartItem) => cartItem._id === id);
-  const [buttonHighlight, setButtonHighlight] = useState(useToggle(false));
-  const handleClick = () => {
-    setButtonHighlight((prev) => !prev);
-  };
 
-  const handleClickAway = () => {
-    setButtonHighlight(false);
-  };
+  const handleOpen = () => setOpen(true);
 
-  const addItemCartWUi = () => {
-    handleClick()
-    addItemCart()
-  }
-
+  const handleClose = () => setOpen(false);
 
   return (
-    <div className={clsx(styles.catalogListItem, styles.flexOrder)}>
-      <img alt="product image" className={styles.productImg} src={image} />
-      <div className={styles.productInfo}>
-        <span className={styles.productPrice}>{`$${price}`}</span>
-        <span className={styles.productTitle}>{`${name}`}</span>
-        <span className={styles.productDesc}>{`${desc}`}</span>
-      </div>
-      {itemInCart ? (
-            <ClickAwayListener
-            mouseEvent="onMouseDown"
-            touchEvent="onTouchStart"
-            onClickAway={handleClickAway}
-          >
-        <div className={styles.productButtonArea} style={{position: 'relative'}}>
-
-          <button
-            onClick={handleClick}
-            className={clsx(styles.productButton)}
-          >
-            {itemInCart.qty}
-          </button>
-          {buttonHighlight ? (
-            <div className={styles.productButtonsAbsolute}>
-            <button
+    <>
+      <div className={clsx(styles.catalogListItem, styles.flexOrder)}>
+        <img
+          alt="product image"
+          className={styles.productImg}
+          src={image}
+          onClick={handleOpen}
+        />
+        <div className={styles.productInfo}>
+          <span className={styles.productPrice}>{`$${price}`}</span>
+          <span className={styles.productTitle}>{`${name}`}</span>
+          <span className={styles.productDesc}>{`${desc}`}</span>
+        </div>
+        {itemInCart ? (
+          <div className={classes.buttonContainer}>
+            <ColorButton
+              variant="contained"
+              color="primary"
+              className={classes.buttonSymbol}
               onClick={addItemCart}
-              className={styles.buttonPlus}
             >
               +
-            </button>
-            <div className={styles.textQty}>
-            {itemInCart.qty}
-            </div>
-            <button
+            </ColorButton>
+            <div className={classes.buttonText}>{itemInCart.qty}</div>
+            <ColorButton
+              variant="contained"
+              color="primary"
+              className={classes.buttonSymbol}
               onClick={removeItemCart}
-              className={styles.buttonPlus}
             >
               -
-            </button>
+            </ColorButton>
           </div>
-        ) : null}
-
-        </div>
-        </ClickAwayListener>
-      ) : (
-            <div className={styles.productButtonArea}>
-            <button
-              onClick={addItemCartWUi}
-              className={styles.productButtonFlex100}
+        ) : (
+          <div className={classes.buttonContainer}>
+            <ColorButton
+              variant="contained"
+              color="primary"
+              className={classes.buttonSymbolCon}
+              onClick={addItemCart}
+              disableRipples
             >
               Add To Cart
-            </button>
+            </ColorButton>
           </div>
-      )}
-    </div>
+        )}
+      </div>
+      <ModalCommon
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        open={open}
+      >
+        <Detailscreen
+          handleClose={handleClose}
+          image={image}
+          price={price}
+          name={name}
+          desc={desc}
+          id={id}
+          addItemCart={addItemCart}
+          removeItemCart={removeItemCart}
+        />
+      </ModalCommon>
+    </>
   );
 }
 

@@ -81,7 +81,7 @@ export default function Header() {
         <div className={styles.productDescription}>
 
               <Typography component="span" variant="body2" color="textPrimary">
-              {`${prod.desc}`}
+              {`${prod.name}`}
               </Typography>
               <Typography component="span" variant="body2" color="textPrimary">
                 Price :               {` ${prod.price}`}.00

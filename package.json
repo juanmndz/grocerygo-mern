@@ -19,8 +19,10 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
+    "moment-timezone": "^0.5.32",
     "mongoose": "^5.10.7",
     "react-currency-format": "^1.0.0",
+    "react-query": "^3.5.12",
     "stripe": "^8.129.0"
   },
   "devDependencies": {
