@@ -35,9 +35,10 @@ const OrderScreen = () => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await Axios.get(`/api/order/myorders`, config);
+    const { data } = await Axios.get(`/api/order/all`, config);
     return data;
   };
+  
   const { data, isLoading, isError } = useQuery('orders', getMyOrders);
 
   const ListOrders = () =>

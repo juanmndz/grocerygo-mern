@@ -24,13 +24,11 @@ export const USER_DETAILS_RESET = 'USER_DETAILS_RESET'
 
 
 export const createOrder = (order) => async (dispatch, getState) => {
-  console.log('createa', order)
 
     try {
       dispatch({
         type: ORDER_CREATE_REQUEST,
       })
-      console.log('createv')
 
       const {
         user: { userInfo },

@@ -9,7 +9,6 @@ export const catalogListAsync = () => async (dispatch) => {
     dispatch({type: CATALOG_LIST_REQUEST})
     try {
       const { data } = await Axios.get('/api/products')
-      console.log(data, 'data')
       dispatch({type: CATALOG_LIST_SUCCESS, payload: data});
     } catch (error) {
       const message =

@@ -20,7 +20,6 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
     const existingCartItem = cartItems.find(cartItem => 
         cartItem._id === cartItemToRemove._id
     );
-    console.log(existingCartItem, 'ds')
 
     if (existingCartItem.qty === 1) {
         return cartItems.filter(cartItem => 

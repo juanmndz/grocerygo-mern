@@ -7,6 +7,8 @@ import RegisterScreen from './screens/RegisterScreen'
 import Checkout from './components/Checkout/Checkout'
 import DetailScreen from './screens/DetailScreen/DetailScreen'
 import OrderScreen from './screens/OrderScreen'
+import PrivateRoute from './components/Common/PrivateRoute'
+
 function Routes() {
     return (
         <Switch>
@@ -15,7 +17,10 @@ function Routes() {
           <Route exact path="/register" render={() => <RegisterScreen />} />
           <Route exact path="/checkout" render={() => <Checkout />} />
           <Route exact path="/detail/:id" render={() => <DetailScreen />} />
-          <Route exact path="/orders" render={() => <OrderScreen />} />
+          <PrivateRoute
+            path="/orders"
+            component={OrderScreen}
+          ></PrivateRoute>
           {/* <Route exact path="/shipping" render={() => <Checkout />} /> */}
         </Switch>
     )

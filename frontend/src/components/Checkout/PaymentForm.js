@@ -5,7 +5,6 @@ import Review from './Review';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { CART_CLEAR_ITEMS } from '../../modules/cart/cartActions';
 
 const PaymentForm = ({ nextStep, backStep, cart, onOrder }) => {
   const [error, setError] = useState(null);

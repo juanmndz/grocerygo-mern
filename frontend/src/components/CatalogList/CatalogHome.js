@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import React from 'react';
 import CatalogListItem from './CatalogListItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { catalogListAsync } from '../../modules/catalog/catalogActions';
 import { addToCart, CART_REMOVE_ITEM } from '../../modules/cart/cartActions';
 import useToggle from '../../hooks/useToggle';
-import { IconButton, Snackbar } from '@material-ui/core';
+import { IconButton, Snackbar, useMediaQuery, useTheme } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import styles from './CatalogList.module.scss'
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {
   Navigation,
@@ -24,6 +20,8 @@ function CatalogList({filter}) {
   const catalogList = useSelector((state) => state.catalog);
   const { loading, catalog } = catalogList;
   const [openSnack, toggleOpenSnack] = useToggle(false);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"))
 
   const filterCatalogList = catalog.filter(item => item.tags.includes(filter))
 
@@ -58,7 +56,7 @@ function CatalogList({filter}) {
     <Swiper
       id="swiper"
       virtual
-      slidesPerView={5}
+      slidesPerView={matches ? 5 : 2}
       // slidesPerColumn={2}
       // slidesPerColumnFill="row"
       spaceBetween={5}

@@ -4,8 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Cart from '../Cart/Cart';
@@ -18,6 +16,7 @@ import {
   Paper,
   Popper,
 } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,6 +42,7 @@ export default function Header() {
 
   const userLogin = useSelector((state) => state.user);
   const { userInfo } = userLogin;
+  const history = useHistory()
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -59,7 +59,7 @@ export default function Header() {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
+    history.push('/orders')
     setOpen(false);
   };
 
@@ -84,9 +84,6 @@ export default function Header() {
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.header}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
 
           <Typography
             component={NavLink}
@@ -137,7 +134,7 @@ export default function Header() {
                         style={{color: '#43B02A'}}
                       >
                         <MenuItem onClick={handleClose}>My Orders</MenuItem>
-                        <MenuItem onClick={handleClose}>My Account</MenuItem>
+                        {userInfo?.status === 'admin' &&  <MenuItem onClick={handleClose}>All Orders</MenuItem> }
                         <MenuItem onClick={logoutHandler}>Logout</MenuItem>
                       </MenuList>
                     </ClickAwayListener>

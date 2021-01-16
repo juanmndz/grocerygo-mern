@@ -13,7 +13,6 @@ const cartReducer = (
   ) => {
     switch (action.type) {
       case CART_ADD_ITEM:
-        console.log(action)
         return {...state, cartItems: addItemToCart(state.cartItems, action.payload)}
       case CART_REMOVE_ITEM:
         return {...state, cartItems: removeItemFromCart(state.cartItems, action.payload)}

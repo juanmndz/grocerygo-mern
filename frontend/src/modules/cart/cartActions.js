@@ -15,8 +15,6 @@ export const saveShippingAddress = (data) => (dispatch) => {
 
 
   export const addToCart = (payload) => async (dispatch, getState) => {
-    // console.log(payload, 'pay')
-    // const { data } = await axios.get(`/api/products/${id}`)
   
     dispatch({
       type: CART_ADD_ITEM,
