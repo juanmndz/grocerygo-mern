@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 const OrderScreen = () => {
   const user = useSelector((state) => state.user);
   const { userInfo } = user;
-  // console.log(userInfo, 'user')
 
   const [page, setPage] = React.useState(1);
   const [postPerPage] = React.useState(3);

@@ -2,7 +2,8 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import Stripe from 'stripe'
-import { isAuth } from '../utils.js';
+import { isAdmin, isAuth } from '../utils/utils.js';
+import data from '../data.js';
 const stripe = new Stripe('sk_test_51HdgOmBXsMDmZZcdkDscGgFvkT269F7zfqulQzLTm8zt1tOwaneYmvdCVLJ0ZXyoJbyqR6RXifM4YhsCjZpHKY5j00XoAcKnhg');
 
 const orderRouter = express.Router();
@@ -11,13 +12,11 @@ orderRouter.post(
   '/payment',
   expressAsyncHandler(async (req, res) => {
     const total = req.body.total;
-    console.log('Payment Request Recieved BOOM!!! for this amount >>> ', total)
     
     const paymentIntent = await stripe.paymentIntents.create({
         amount: total * 100,
         currency: 'usd'
     })
-    // console.log(paymentIntent, 'paymentIntent')
     res.status(201).send({
         clientSecret: paymentIntent.client_secret
     })
@@ -42,7 +41,6 @@ orderRouter.post(
       throw new Error('No order items')
       return
     } else {
-    // console.log(req.body)
       const order = new Order({
         orderItems,
         user: req.user._id,
@@ -53,19 +51,15 @@ orderRouter.post(
         shippingPrice,
         totalPrice,
       })
-      console.log(order, 'order')
-
       const createdOrder = await order.save().then(() => {
 
     })
     .catch((error) => {
         //When there are errors We handle them here
-        console.log(error);
         res.status(404)
         throw new Error('Order not found')
   
     });
-      console.log(order, 'orderx')
 
       res.status(201).json({createdOrder})
     }
@@ -90,7 +84,7 @@ orderRouter.get(
 );
 
 orderRouter.get(
-  '/myorders',
+  '/myorders', isAuth,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.user._id })
     res.json(orders)
@@ -99,6 +93,8 @@ orderRouter.get(
 
 orderRouter.get(
   '/all',
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({})
     res.json(orders)
@@ -110,9 +106,8 @@ orderRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
     await Order.remove({});
-    console.log('fdsf')
-    // const createdProducts = await Product.insertMany(data.products);
-    res.send({  });
+    const createdProducts = await Order.insertMany(data.orders);
+    res.send({createdProducts});
   })
 );
 export default orderRouter;

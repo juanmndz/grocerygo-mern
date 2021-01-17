@@ -33,7 +33,7 @@ const DetailScreen = ({
               </div>
       <div className={styles.productContainer}>
         <div className={styles.productPicture}>
-          <img className={styles.imgContain} src={image} />
+          <img alt="product" className={styles.imgContain} src={image} />
         </div>
 
         <div className={styles.productDetail}>

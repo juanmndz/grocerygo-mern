@@ -2,7 +2,7 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import User from '../models/userModel.js';
-import {  isAdmin, isAuth, generateToken } from '../utils.js';
+import {  isAdmin, isAuth, generateToken } from '../utils/utils.js';
 import bcrypt from 'bcryptjs'
 
 const userRouter = express.Router();
@@ -23,7 +23,6 @@ userRouter.post('/login', expressAsyncHandler(async (req,res) => {
   const {email, password} = req.body
   const user = await User.findOne({email})
 
-  console.log(await bcrypt.compare(password, user.password))
 
   if (user && (await bcrypt.compare(password, user.password)) ) {
     res.json({

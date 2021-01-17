@@ -13,7 +13,6 @@ const PaymentForm = ({ nextStep, backStep, cart, onOrder }) => {
   const [succeded, setSucceeded] = useState(false);
   const [clientSecret, setClientSecret] = useState('');
   const history = useHistory();
-  const dispatch = useDispatch();
 
   // runs whens it begins to load or when variables in the brackets change
   useEffect(() => {

@@ -7,7 +7,9 @@ import RegisterScreen from './screens/RegisterScreen'
 import Checkout from './components/Checkout/Checkout'
 import DetailScreen from './screens/DetailScreen/DetailScreen'
 import OrderScreen from './screens/OrderScreen'
+import AdminOrderScreen from './screens/OrderScreen'
 import PrivateRoute from './components/Common/PrivateRoute'
+import AdminRoute from './components/Common/AdminRoute'
 
 function Routes() {
     return (
@@ -21,6 +23,10 @@ function Routes() {
             path="/orders"
             component={OrderScreen}
           ></PrivateRoute>
+          <AdminRoute
+            path="/adminorders"
+            component={OrderScreen}
+          ></AdminRoute>
           {/* <Route exact path="/shipping" render={() => <Checkout />} /> */}
         </Switch>
     )

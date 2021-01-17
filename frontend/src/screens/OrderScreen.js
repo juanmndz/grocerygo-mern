@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 const OrderScreen = () => {
   const user = useSelector((state) => state.user);
   const { userInfo } = user;
-  // console.log(userInfo, 'user')
 
   const [page, setPage] = React.useState(1);
   const [postPerPage] = React.useState(3);
@@ -159,7 +158,7 @@ const OrderItem = ({ item }) => {
   return (
     <Box display="flex">
       <Box mr="1rem">
-        <img className={classes.imgContain} src={item.image} />
+        <img alt="product" className={classes.imgContain} src={item.image} />
       </Box>
       <Box display="flex" flexDirection="column">
         <Typography component="span" variant="body2" color="textPrimary">

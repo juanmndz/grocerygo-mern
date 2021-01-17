@@ -1,21 +1,4 @@
-import bcrypt from 'bcryptjs';
-
-const data = {
-  users: [
-    {
-      name: 'Admin',
-      email: 'admin@example.com',
-      password: bcrypt.hashSync('1234', 8),
-      status: 'admin'
-    },
-    {
-      name: 'John',
-      email: 'user@example.com',
-      password: bcrypt.hashSync('1234', 8),
-      status: 'member',
-    },
-  ],
-  products: [
+const products = [
     {
       name: 'Avocado, Large',
       tags: ['vegetables'],
@@ -295,8 +278,7 @@ const data = {
       stock: 10,
       desc: '20 oz',
     }
-  ],
-};
-export default data;
-
-
+  ]
+  
+  export default products
+  

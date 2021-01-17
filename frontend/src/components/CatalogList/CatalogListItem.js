@@ -22,7 +22,7 @@ function CatalogListItem(props) {
     <>
       <div className={clsx(styles.catalogListItem, styles.flexOrder)}>
         <img
-          alt="product image"
+          alt="product"
           className={styles.productImg}
           src={image}
           onClick={handleOpen}
