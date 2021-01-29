@@ -59,7 +59,7 @@ export default function Header() {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-    history.push('/orders')
+    history.push('/adminorders')
     setOpen(false);
   };
 
@@ -92,7 +92,7 @@ export default function Header() {
             variant="h6"
             className={classes.title}
           >
-            Groceries
+            GroceryGo
           </Typography>
           <div>
             {userInfo ? (

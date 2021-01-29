@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import CatalogHome from '../components/CatalogList/CatalogHome';
 import { catalogListAsync } from '../modules/catalog/catalogActions';
 import Skeleton from '@material-ui/lab/Skeleton';
-import Avatar from '@material-ui/core/Avatar';
 
 export default function HomePage() {
   const dispatch = useDispatch();

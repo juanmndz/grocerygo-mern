@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Detailscreen from '../../screens/DetailScreen/DetailScreen';
 import ModalCommon from '../Common/ModalCommon';
 import useStyles, { ColorButton } from '../Common/ColorButton';
+import CurrencyFormat from 'react-currency-format';
 
 function CatalogListItem(props) {
   const { image, price, name, desc, id, addItemCart, removeItemCart } = props;
@@ -28,7 +29,18 @@ function CatalogListItem(props) {
           onClick={handleOpen}
         />
         <div className={styles.productInfo}>
-          <span className={styles.productPrice}>{`$${price}`}</span>
+          <span className={styles.productPrice}>
+            {' '}
+            <CurrencyFormat
+              renderText={(value) => <span>{value}</span>}
+              decimalScale={2}
+              value={price}
+              displayType={'text'}
+              thousandSperator={true}
+              fixedDecimalScale={true}
+              prefix={'$'}
+            />
+          </span>
           <span className={styles.productTitle}>{`${name}`}</span>
           <span className={styles.productDesc}>{`${desc}`}</span>
         </div>

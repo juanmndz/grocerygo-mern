@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Typography, Divider, Button } from '@material-ui/core';
 import Review from './Review';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
