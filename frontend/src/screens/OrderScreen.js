@@ -45,6 +45,8 @@ const OrderScreen = () => {
       .map((order) => <Order order={order} />);
 
   if (isLoading) return <CircularProgress />;
+  if (!data) return  <Box mt="5rem" justifyContent="center" alignContent="center">No order history!</Box>
+
 
   return (
     <Box mt="5rem">

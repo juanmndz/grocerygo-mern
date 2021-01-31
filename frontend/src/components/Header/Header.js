@@ -55,11 +55,12 @@ export default function Header() {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleClose = (event, isAdmin) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-    history.push('/adminorders')
+    console.log(isAdmin, 'isAdmin')
+    isAdmin ? history.push('/adminorders') : history.push('/orders')
     setOpen(false);
   };
 
@@ -134,7 +135,7 @@ export default function Header() {
                         style={{color: '#43B02A'}}
                       >
                         <MenuItem onClick={handleClose}>My Orders</MenuItem>
-                        {userInfo?.status === 'admin' &&  <MenuItem onClick={handleClose}>All Orders</MenuItem> }
+                        {userInfo?.status === 'admin' &&  <MenuItem onClick={() => handleClose(true)}>All Orders</MenuItem> }
                         <MenuItem onClick={logoutHandler}>Logout</MenuItem>
                       </MenuList>
                     </ClickAwayListener>

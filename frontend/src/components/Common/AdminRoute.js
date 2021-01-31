@@ -6,12 +6,12 @@ import { Redirect, Route } from 'react-router-dom';
 export default function PrivateRoute({ component: Component, ...rest }) {
   const userSignin = useSelector((state) => state.user);
   const { userInfo } = userSignin;
-
+  // console.log(userInfo, 'userInfo')
   return (
     <Route
       {...rest}
       render={(props) =>
-        userInfo  && userSignin.status === 'admin' ? (
+        userInfo  && userInfo.status === 'admin' ? (
           <Component {...props}></Component>
         ) : (
           <Redirect to="/login" />
