@@ -16,7 +16,7 @@ GroceryGo is food delivery, grocery and local shopping platform.
 
 [Live Demo Link](https://clone-webapp.web.app/)
 
-<img src="./docs/imageFront.png" alt="" width=800px height=380px>
+<img src="./docs/imageFront.png" alt="">
 
 ## Built With
 
