@@ -1,7 +1,6 @@
 import Axios from "axios";
 
-const API_SERVER = 'http://localhost:5000'
-
+const API_SERVER =  process.env.REACT_APP_ENV ? 'http://localhost:5000' : 'https://grocerygo.herokuapp.com'
   
 export const getAllBooks = async () => {
     const response = await fetch(`${API_SERVER}/books`);

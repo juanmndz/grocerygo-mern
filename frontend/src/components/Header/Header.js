@@ -59,7 +59,7 @@ export default function Header() {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-    console.log(isAdmin, 'isAdmin')
+
     isAdmin ? history.push('/adminorders') : history.push('/orders')
     setOpen(false);
   };
