@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API_SERVER } from '../../api'
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST'
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
 export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL'
@@ -20,7 +21,7 @@ export const login = (dataBody) => async (dispatch) => {
       }
   
       const { data } = await axios.post(
-        '/api/users/login',
+        `${API_SERVER}/api/users/login`,
         { email: dataBody.email, password: dataBody.password },
         config
       )
@@ -62,7 +63,7 @@ export const login = (dataBody) => async (dispatch) => {
       }
   
       const { data } = await axios.post(
-        '/api/users/register',
+        `${API_SERVER}/api/users/register`,
         { name: dataBody.name, email: dataBody.email, password: dataBody.password },
         config
       )

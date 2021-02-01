@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API_SERVER } from '../../api'
 import { CART_CLEAR_ITEMS } from '../cart/cartActions'
 import { logout } from '../user/userActions'
 
@@ -40,7 +41,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
-      const { data } = await axios.post(`/api/order/create`, order, config)
+      const { data } = await axios.post(`${API_SERVER}/api/order/create`, order, config)
   
       dispatch({
         type: ORDER_CREATE_SUCCESS,
@@ -82,7 +83,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         },
       }
   
-      const { data } = await axios.get(`/api/orders/${id}`, config)
+      const { data } = await axios.get(`${API_SERVER}/api/orders/${id}`, config)
   
       dispatch({
         type: ORDER_DETAILS_SUCCESS,
@@ -120,7 +121,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         },
       }
   
-      const { data } = await axios.get(`/api/orders/myorders`, config)
+      const { data } = await axios.get(`${API_SERVER}/api/orders/myorders`, config)
   
       dispatch({
         type: ORDER_LIST_MY_SUCCESS,
@@ -157,7 +158,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         },
       }
   
-      const { data } = await axios.get(`/api/orders`, config)
+      const { data } = await axios.get(`${API_SERVER}/api/orders`, config)
   
       dispatch({
         type: ORDER_LIST_SUCCESS,

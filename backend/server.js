@@ -8,11 +8,11 @@ import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 import connectDB from './utils/db.js';
 import cors from 'cors'
 
-app.use(cors())
 
 dotenv.config();
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

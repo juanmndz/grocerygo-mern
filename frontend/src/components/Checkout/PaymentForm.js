@@ -4,6 +4,7 @@ import Review from './Review';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { API_SERVER } from '../../api';
 
 const PaymentForm = ({ nextStep, backStep, cart, onOrder }) => {
   const [error, setError] = useState(null);
@@ -17,7 +18,7 @@ const PaymentForm = ({ nextStep, backStep, cart, onOrder }) => {
   useEffect(() => {
     // generate the special stripe secret which allows us to charge a customer
     const getClientSecret = async () => {
-      const paymentIntent = await Axios.post('/api/order/payment', {
+      const paymentIntent = await Axios.post(`${API_SERVER}/api/order/payment`, {
         total: cart.totalPrice,
       });
 

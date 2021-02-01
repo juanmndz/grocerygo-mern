@@ -11,6 +11,7 @@ import moment from 'moment-timezone';
 import { useSelector } from 'react-redux';
 import Axios from 'axios';
 import Pagination from '@material-ui/lab/Pagination';
+import { API_SERVER } from '../api';
 
 // Fix SHopping cart for orders
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +35,7 @@ const OrderScreen = () => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await Axios.get(`/api/order/all`, config);
+    const { data } = await Axios.get(`${API_SERVER}/api/order/all`, config);
 
     console.log(data, ' data')
     return data;

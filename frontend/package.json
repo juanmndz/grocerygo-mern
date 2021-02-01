@@ -1,7 +1,6 @@
 {
   "name": "react-ecommerce-material",
   "version": "0.1.0",
-  "proxy": "https://grocerygo.herokuapp.com",
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^1.2.0",
