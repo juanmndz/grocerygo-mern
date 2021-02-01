@@ -6,6 +6,9 @@ import orderRoutes from './routers/orderRoutes.js'
 import productRoutes from './routers/productRoutes.js'
 import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 import connectDB from './utils/db.js';
+import cors from 'cors'
+
+app.use(cors())
 
 dotenv.config();
 
