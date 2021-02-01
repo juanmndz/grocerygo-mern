@@ -2,7 +2,7 @@
 
 GroceryGo is food delivery, grocery and local shopping platform.
 
-<img src="./docs/gitimage.gif" alt="" width=900px height=320px>
+<img src="./docs/gitimage.gif" alt="">
 
 ## Features
 
